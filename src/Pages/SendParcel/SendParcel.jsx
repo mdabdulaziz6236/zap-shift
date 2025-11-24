@@ -117,6 +117,7 @@ const SendParcel = () => {
             <label className="label">Parcel Weight (kg)</label>
             <input
               type="text"
+              required
               {...register("parcelWeight")}
               className="input w-full"
               placeholder="Parcel Weight"

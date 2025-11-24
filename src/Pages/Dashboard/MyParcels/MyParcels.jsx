@@ -2,12 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { FiEdit } from "react-icons/fi";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const MyParcels = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], refetch } = useQuery({
     queryKey: ["my-parcels", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/parcels?email=${user.email}`);
@@ -15,13 +19,32 @@ const MyParcels = () => {
     },
   });
 
-  /*   const { data: parcels = [] } = useQuery({
-    queryKey: ["myParcels", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/parcels?email=${user.email}`);
-      return res.data;
-    },
-  }); */
+  const handleParcelDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(id);
+        axiosSecure.delete(`/parcels/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            /* refresh the data in th ui */
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your parcel request has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <h3>All of my parcels.{parcels.length}</h3>
@@ -38,12 +61,28 @@ const MyParcels = () => {
             </tr>
           </thead>
           <tbody>
-            {parcels.map((parcel,index) => (
+            {parcels.map((parcel, index) => (
               <tr key={parcel._id}>
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.cost}</td>
                 <td>Blue</td>
+                <td className="space-x-2">
+                  <button className="btn btn-square hover:bg-primary">
+                    <FaMagnifyingGlass />
+                  </button>
+                  <button className="btn btn-square hover:bg-primary">
+                    <FiEdit />
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleParcelDelete(parcel._id);
+                    }}
+                    className="btn btn-square hover:bg-primary"
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

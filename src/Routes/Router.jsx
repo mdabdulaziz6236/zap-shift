@@ -8,6 +8,9 @@ import Register from "../Pages/Auth/Register/Register";
 import ForgetPassword from "../Pages/Auth/ForgetPassword/ForgetPassword";
 import Rider from "../Pages/Rider/Rider";
 import PrivetRoute from "./PrivetRoute";
+import SendParcel from "../Pages/SendParcel/SendParcel";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import MyParcels from "../Pages/Dashboard/MyParcels/MyParcels";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +34,15 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path: "send-parcel",
+        loader: () => fetch("/warehouses.json").then((res) => res.json()),
+        element: (
+          <PrivetRoute>
+            <SendParcel></SendParcel>
+          </PrivetRoute>
+        ),
+      },
     ],
   },
   {
@@ -50,5 +62,19 @@ export const router = createBrowserRouter([
         Component: ForgetPassword,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivetRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivetRoute>
+      
+    ),
+    children:[{
+      path:'my-parcels',
+      Component:MyParcels
+      
+    }]
   },
 ]);

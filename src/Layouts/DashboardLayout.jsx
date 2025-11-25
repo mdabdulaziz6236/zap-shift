@@ -1,5 +1,6 @@
 import React from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
+import { FaCreditCard } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -34,8 +35,6 @@ const DashboardLayout = () => {
         </nav>
         {/* Page content here */}
         <Outlet></Outlet>
-        
-
       </div>
 
       <div className="drawer-side is-drawer-close:overflow-visible">
@@ -49,7 +48,8 @@ const DashboardLayout = () => {
           <ul className="menu w-full grow">
             {/* List item */}
             <li>
-              <Link to='/'
+              <Link
+                to="/"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Homepage"
               >
@@ -74,12 +74,24 @@ const DashboardLayout = () => {
             {/* List item */}
             {/* our Dashboard list items */}
             <li>
-                <NavLink
-                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="My Parcels"
-                
-                
-                  to='/dashboard/my-parcels'><CiDeliveryTruck className="my-1.5 inline-block size-4" /> <span className="is-drawer-close:hidden">My Parcels</span></NavLink>
+                to="/dashboard/my-parcels"
+              >
+                <CiDeliveryTruck className="my-1.5 inline-block size-4" />{" "}
+                <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Payment history"
+                to="/dashboard/payment-history"
+              >
+                <FaCreditCard className="my-1.5 inline-block size-4" />{" "}
+                <span className="is-drawer-close:hidden">Payment History</span>
+              </NavLink>
             </li>
 
             <li>

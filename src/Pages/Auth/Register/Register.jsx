@@ -4,12 +4,14 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Register = () => {
   const { registerUser, updateUserProfile } = useAuth();
   const location = useLocation();
   // console.log('in the register page:', location)
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -19,8 +21,7 @@ const Register = () => {
     // console.log("after register", data.photo[0]);
     const profileImage = data.photo[0];
     registerUser(data.email, data.password)
-      .then((result) => {
-        if(result){
+      .then(() => {
         /* 1.store the image and get the photo url */
         const formData = new FormData();
         formData.append("image", profileImage);
@@ -29,11 +30,23 @@ const Register = () => {
           import.meta.env.VITE_image_host_key
         }`;
         axios.post(image_API_URl, formData).then((res) => {
-          console.log("after image upload:", res.data.data.url);
+          const photoURL = res.data.data.url;
           const userProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: photoURL,
           };
+
+          // create user in the database
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created in the database");
+            }
+          });
           /* update user profile here to firebase */
           updateUserProfile(userProfile)
             .then(() => {
@@ -42,7 +55,6 @@ const Register = () => {
             })
             .catch((error) => console.log(error));
         });
-        }
       })
       .catch((error) => {
         console.log(error);
@@ -129,7 +141,9 @@ const Register = () => {
                 <p>
                   Already! Have an Account? Please{" "}
                   <span className="font-extrabold text-green-500 underline hover:text-pink-500">
-                    <Link state={location.state} to="/login">Login</Link>
+                    <Link state={location.state} to="/login">
+                      Login
+                    </Link>
                   </span>
                 </p>
               </div>

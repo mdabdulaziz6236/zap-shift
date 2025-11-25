@@ -9,8 +9,10 @@ const SocialLogin = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        console.log(result);
-        navigate(location?.state || '/');
+        if(result){
+
+          navigate(location?.state || '/');
+        }
       })
       .catch((error) => {
         console.log(error.message);

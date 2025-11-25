@@ -8,7 +8,7 @@ import axios from "axios";
 const Register = () => {
   const { registerUser, updateUserProfile } = useAuth();
   const location = useLocation();
-  console.log('in the register page:', location)
+  // console.log('in the register page:', location)
   const navigate = useNavigate();
   const {
     register,
@@ -16,11 +16,11 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const handleRegister = (data) => {
-    console.log("after register", data.photo[0]);
+    // console.log("after register", data.photo[0]);
     const profileImage = data.photo[0];
     registerUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
+        if(result){
         /* 1.store the image and get the photo url */
         const formData = new FormData();
         formData.append("image", profileImage);
@@ -37,11 +37,12 @@ const Register = () => {
           /* update user profile here to firebase */
           updateUserProfile(userProfile)
             .then(() => {
-              console.log("profile updated");
+              // console.log("profile updated");
               navigate(location?.state || "/");
             })
             .catch((error) => console.log(error));
         });
+        }
       })
       .catch((error) => {
         console.log(error);

@@ -29,7 +29,7 @@ const SendParcel = () => {
     return districts;
   };
   const handleSendParcel = (data) => {
-    console.log(data);
+    // console.log(data);
     const isDocument = data.parcelType === "document";
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
     const parcelWeight = parseFloat(data.parcelWeight);
@@ -61,7 +61,7 @@ const SendParcel = () => {
       if (result.isConfirmed) {
         /* save the data into the database */
         axiosSecure.post("/parcels", data).then((res) => {
-          console.log("after saving data in db", res.data);
+          // console.log("after saving data in db", res.data);
           alert('Alhamdulillah')
           if (res.data.insertedId) {
 
@@ -83,7 +83,7 @@ const SendParcel = () => {
         // });
       }
     });
-    console.log("Cost:", cost);
+    // console.log("Cost:", cost);
   };
   return (
     <div className="p-20">

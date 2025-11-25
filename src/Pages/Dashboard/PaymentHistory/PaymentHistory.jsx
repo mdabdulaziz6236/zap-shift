@@ -10,10 +10,11 @@ const PaymentHistory = () => {
     queryKey: ["payments", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments?email=${user?.email}`);
+      
       return res.data;
     },
   });
-  console.log(payments);
+//   console.log(payments);
   return (
     <div>
       <h2 className="text-5xl">Payment History : {payments.length}</h2>

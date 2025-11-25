@@ -31,7 +31,7 @@ const MyParcels = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(id);
+        // console.log(id);
         axiosSecure.delete(`/parcels/${id}`).then((res) => {
           if (res.data.deletedCount) {
             /* refresh the data in th ui */

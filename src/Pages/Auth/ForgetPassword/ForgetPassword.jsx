@@ -6,7 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 const ForgetPassword = () => {
   const { resetPassword } = useAuth();
   const location = useLocation()
-  console.log('from the forget password page<', location)
+  // console.log('from the forget password page<', location)
   const navigate = useNavigate()
   const {
     register,

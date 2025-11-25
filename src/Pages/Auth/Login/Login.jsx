@@ -16,13 +16,15 @@ const Login = () => {
   const handleLogin = (data) => {
     signInUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
-        navigate(location?.state || '/' )
+        if(result){
+
+          navigate(location?.state || '/' )
+        }
       })
       .catch((error) => {
         console.log(error.message);
       });
-    console.log(data);
+    // console.log(data);
   };
   return (
     <div className="flex justify-center items-center min-h-screen">

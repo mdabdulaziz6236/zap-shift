@@ -96,7 +96,7 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
-            {role.role === "admin" && (
+            {role === "admin" && (
               <>
                 <li>
                   <NavLink

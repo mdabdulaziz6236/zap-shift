@@ -12,7 +12,7 @@ const SocialLogin = () => {
     googleLogin()
       .then((result) => {
         // create user in the database
-        console.log(result.user)
+        // console.log(result.user)
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,

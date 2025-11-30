@@ -5,6 +5,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../Hooks/useRole";
 import { RiEBikeFill } from "react-icons/ri";
 import { FiPackage } from "react-icons/fi";
+import { SiGoogletasks } from "react-icons/si";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -110,6 +111,18 @@ const DashboardLayout = () => {
                     <FiPackage className="my-1.5 inline-block size-4" />{" "}
                     <span className="is-drawer-close:hidden">
                       Assign Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Completed Deliveries"
+                    to="/dashboard/completed-deliveries"
+                  >
+                    <SiGoogletasks className="my-1.5 inline-block size-4" />{" "}
+                    <span className="is-drawer-close:hidden">
+                      Completed Deliveries
                     </span>
                   </NavLink>
                 </li>

@@ -4,10 +4,11 @@ import { FaCreditCard, FaMotorcycle, FaUsers } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../Hooks/useRole";
 import { RiEBikeFill } from "react-icons/ri";
+import { FiPackage } from "react-icons/fi";
 
 const DashboardLayout = () => {
   const { role } = useRole();
-  console.log(role)
+  console.log(role);
   return (
     <div className="max-w-7xl mx-auto drawer  lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -97,6 +98,24 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+            {/* Rider only links */}
+            {role === "rider" && (
+              <>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Deliveries"
+                    to="/dashboard/assigned-deliveries"
+                  >
+                    <FiPackage className="my-1.5 inline-block size-4" />{" "}
+                    <span className="is-drawer-close:hidden">
+                      Assign Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* admin only links */}
             {role === "admin" && (
               <>
                 <li>

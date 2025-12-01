@@ -17,7 +17,6 @@ const AssignedDeliveries = () => {
     },
   });
   const handleDeliveryStatusUpdate = (parcel, status) => {
-    console.log(status);
     let message = `parcel status is updated with ${status
       .split("_")
       .join(" ")}`;
@@ -29,7 +28,6 @@ const AssignedDeliveries = () => {
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, statusInfo)
       .then((res) => {
-        console.log(res.data);
         if (res.data.modifiedCount) {
           refetch();
           Swal.fire({
@@ -42,7 +40,6 @@ const AssignedDeliveries = () => {
         }
       });
   };
-  console.log(parcels[1]);
   return (
     <div>
       <h3>Available Parcels for You: {parcels.length}</h3>

@@ -33,7 +33,6 @@ const AssignRiders = () => {
     riderModalRef.current.showModal();
   };
   const handleAssignRider = (rider) => {
-    console.log("...", rider);
     const riderAssignInfo = {
       riderId: rider._id,
       riderEmail: rider.email,

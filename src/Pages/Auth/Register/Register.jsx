@@ -5,11 +5,11 @@ import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { registerUser, updateUserProfile } = useAuth();
   const location = useLocation();
-  // console.log('in the register page:', location)
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const {
@@ -18,7 +18,6 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const handleRegister = (data) => {
-    // console.log("after register", data.photo[0]);
     const profileImage = data.photo[0];
     registerUser(data.email, data.password)
       .then(() => {
@@ -44,7 +43,13 @@ const Register = () => {
           };
           axiosSecure.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              console.log("user created in the database");
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `Register Successfully ${data.name} `,
+                showConfirmButton: false,
+                timer: 1000,
+              });
             }
           });
           /* update user profile here to firebase */

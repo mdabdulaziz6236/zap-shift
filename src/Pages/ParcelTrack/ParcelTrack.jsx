@@ -10,7 +10,6 @@ const ParcelTrack = () => {
     queryKey: ["tracking", trackingId],
     queryFn: async () => {
       const res = await axiosInstance.get(`/trackings/${trackingId}/logs`);
-      console.log(res.data);
       return res.data;
     },
   });

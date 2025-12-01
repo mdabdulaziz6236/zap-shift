@@ -12,20 +12,17 @@ const SocialLogin = () => {
     googleLogin()
       .then((result) => {
         // create user in the database
-        // console.log(result.user)
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,
           photoURL: result.user.photoURL,
         };
-        
+
         axiosSecure.post("/users", userInfo).then((res) => {
-          console.log("user data has been stored", res.data);
-          navigate(location?.state || "/");
+          if (res.data) {
+            navigate(location?.state || "/");
+          }
         });
-        // .catch(error => {
-        //   console.log('aaaaaaaaaaaaa',error)
-        // });
       })
       .catch((error) => {
         console.log(error.message);

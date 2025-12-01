@@ -28,7 +28,6 @@ const Rider = () => {
     return districts;
   };
   const handleRiderApplication = (data) => {
-    console.log(data);
     axiosSecure.post("/riders", data).then((res) => {
       if (res.data.insertedId) {
         navigate('/')

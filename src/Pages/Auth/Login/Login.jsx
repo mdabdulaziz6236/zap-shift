@@ -24,7 +24,6 @@ const Login = () => {
       .catch((error) => {
         console.log(error.message);
       });
-    // console.log(data);
   };
   return (
     <div className="flex justify-center items-center min-h-screen">

@@ -82,7 +82,6 @@ const SendParcel = () => {
         // });
       }
     });
-    // console.log("Cost:", cost);
   };
   return (
     <div className="p-20">

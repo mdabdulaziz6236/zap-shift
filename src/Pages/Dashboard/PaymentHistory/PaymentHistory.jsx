@@ -14,7 +14,6 @@ const PaymentHistory = () => {
       return res.data;
     },
   });
-    console.log(payments);
   return (
     <div>
       <h2 className="text-5xl">Payment History : {payments.length}</h2>

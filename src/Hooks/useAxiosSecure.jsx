@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://zap-shift-server-alpha-two.vercel.app",
 });
 
 const useAxiosSecure = () => {
@@ -22,7 +22,6 @@ const useAxiosSecure = () => {
         return response;
       },
       (error) => {
-        console.log(error);
         const statusCode = error.status;
         if (statusCode === 401 || statusCode === 403) {
           logOut().then(() => {

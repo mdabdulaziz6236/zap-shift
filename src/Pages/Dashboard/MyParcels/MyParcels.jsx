@@ -47,17 +47,18 @@ const MyParcels = () => {
     });
   };
   const handlePayment = async (parcel) => {
-    const paymentInfo = {
+    const parcelInfo = {
       cost: parcel.cost,
       parcelId: parcel._id,
       senderEmail: parcel.senderEmail,
       parcelName: parcel.parcelName,
+      trackingId: parcel.trackingId,
     };
     const res = await axiosSecure.post(
       "/payment-checkout-session",
-      paymentInfo
+      parcelInfo
     );
-    console.log(res.data.url);
+    // console.log(res.data.url);
     window.location.assign(res.data.url);
   };
   return (
@@ -85,7 +86,7 @@ const MyParcels = () => {
                 <td>{parcel.cost}</td>
                 <td>
                   {parcel.paymentStatus === "paid" ? (
-                    <span className="text-green-500">Paid</span>
+                    <span className="text-green-800">Paid</span>
                   ) : (
                     <button
                       onClick={() => {
@@ -97,7 +98,11 @@ const MyParcels = () => {
                     </button>
                   )}
                 </td>
-                <td>{parcel.trackingId}</td>
+                <td className="text-green-500 font-bold hover:underline hover:text-pink-500">
+                  <Link to={`/parcel-track/${parcel.trackingId}`}>
+                    {parcel.trackingId}
+                  </Link>
+                </td>
                 <td>{parcel.deliveryStatus}</td>
                 <td className="space-x-2">
                   <button className="btn btn-square hover:bg-primary">

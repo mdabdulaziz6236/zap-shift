@@ -17,8 +17,8 @@ const AssignRiders = () => {
     },
   });
 
-//   todo : invalidate query after assigning a rider.
-  const {  data: riders = [] } = useQuery({
+  //   todo : invalidate query after assigning a rider.
+  const { data: riders = [] } = useQuery({
     queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
     enabled: !!selectedParcel,
     queryFn: async () => {
@@ -33,12 +33,13 @@ const AssignRiders = () => {
     riderModalRef.current.showModal();
   };
   const handleAssignRider = (rider) => {
-    console.log('...',rider)
+    console.log("...", rider);
     const riderAssignInfo = {
       riderId: rider._id,
       riderEmail: rider.email,
       riderName: rider.name,
       parcelId: selectedParcel._id,
+      trackingId: selectedParcel.trackingId,
     };
     axiosSecure
       .patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)

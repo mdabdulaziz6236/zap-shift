@@ -12,23 +12,25 @@ const Navbar = () => {
         <NavLink to="/">Services</NavLink>
       </li>
       <li>
+        <NavLink to="/send-parcel">Send a Parcel</NavLink>
+      </li>
+      <li>
+        <NavLink to="/coverage">Coverage Areas</NavLink>
+      </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink to="/dashboard/my-parcels">My Parcels</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
+        </>
+      )}
+      <li>
         <NavLink to="/">About Us</NavLink>
       </li>
-      <li>
-        <NavLink to="/send-parcel">Send Parcel</NavLink>
-      </li>
-      <li>
-        <NavLink to="/coverage">Coverage</NavLink>
-      </li>
-      {user && <>
-        <li>
-          <NavLink to="/dashboard/my-parcels">My Parcels</NavLink>
-        </li>
-        <li>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-        </li>
-        </>
-      }
     </>
   );
   /* Logout */
@@ -66,7 +68,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <div className="text-xl hover:underline hover:decoration-primary">
+        <div className="text-xl flex justify-center items-center hover:underline hover:decoration-primary">
           <Logo />
         </div>
       </div>

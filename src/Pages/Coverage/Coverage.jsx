@@ -15,13 +15,12 @@ const Coverage = () => {
     );
     if (district) {
       const coord = [district.latitude, district.longitude];
-      // console.log(district, coord);
       /* go to the location */
       mapRef.current.flyTo(coord, 14);
     }
   };
   return (
-    <div className="">
+    <div>
       <div className="p-20 shadow rounded my-8">
         <h2 className="text-5xl">We are available in 64 districts</h2>
         <div>

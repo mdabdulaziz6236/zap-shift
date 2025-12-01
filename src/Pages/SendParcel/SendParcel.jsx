@@ -62,7 +62,6 @@ const SendParcel = () => {
         /* save the data into the database */
         axiosSecure.post("/parcels", data).then((res) => {
           // console.log("after saving data in db", res.data);
-          alert('Alhamdulillah')
           if (res.data.insertedId) {
 
             navigate('/dashboard/my-parcels')
@@ -219,7 +218,7 @@ const SendParcel = () => {
                 type="email"
                 {...register("receiverEmail")}
                 className="input w-full"
-                placeholder="Receiver Name"
+                placeholder="Receiver Email"
               />
               {/* receiver region */}
               <fieldset className="fieldset">

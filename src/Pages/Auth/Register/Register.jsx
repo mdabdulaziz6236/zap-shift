@@ -50,7 +50,6 @@ const Register = () => {
           /* update user profile here to firebase */
           updateUserProfile(userProfile)
             .then(() => {
-              // console.log("profile updated");
               navigate(location?.state || "/");
             })
             .catch((error) => console.log(error));
